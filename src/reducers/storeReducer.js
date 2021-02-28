@@ -12,7 +12,9 @@ const client = ShopifyClient.buildClient({
 // we shouldn't have to create a new client every time we want to send off a query, let's add it to our global state
 export const INITIAL_STORE_STATE = {
   client,
-  checkout: {},
+  checkout: {
+    lineItems: [],
+  },
   products: [],
 };
 
