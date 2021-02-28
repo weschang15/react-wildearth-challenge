@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Layout from "./Layout";
+import PageHeader from "./PageHeader";
 
 function Products({ products }) {
   return (
     <Layout>
-      <h1>Product Listings</h1>
+      <PageHeader pageTitle="Product Listings" />
       <div
         style={{
           display: "grid",
