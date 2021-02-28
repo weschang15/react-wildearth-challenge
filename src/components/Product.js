@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "../hooks/useDispatch";
 import { useStore } from "../hooks/useStore";
+import { formatCurrency } from "../utils/formatCurrency";
 import Layout from "./Layout";
 
 const INITIAL_FIELDS = {
@@ -27,7 +28,7 @@ function Product() {
       .filter((product) => product.handle === handle)
       .pop();
 
-    if (product && product.variants[0].title === "Default Title") {
+    if (product) {
       setFields((prevState) => {
         return {
           ...prevState,
@@ -93,7 +94,9 @@ function Product() {
                 name="variant"
                 value={variant.id}
                 onChange={handleFieldChange}
+                checked={fields.variant === variant.id}
               />
+              <p>{formatCurrency(variant.priceV2)}</p>
             </div>
           );
         })}
