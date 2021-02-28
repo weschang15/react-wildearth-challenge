@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Product from "./components/Product";
 import Products from "./components/Products";
 import { useDispatch } from "./hooks/useDispatch";
 import { useStore } from "./hooks/useStore";
@@ -49,6 +50,9 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Products products={products} />
+        </Route>
+        <Route path="/products/:handle" exact>
+          <Product />
         </Route>
       </Switch>
     </BrowserRouter>
