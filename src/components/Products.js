@@ -15,6 +15,7 @@ function Products({ products }) {
       >
         {products.map((product) => (
           <article
+            key={product.id}
             style={{
               padding: "1em",
               boxShadow:
