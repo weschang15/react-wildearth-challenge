@@ -2,7 +2,8 @@
 // I want to share some level of state across the entire application.
 // I also want to separate how this application mutates state from the UI logic
 
-import React, { createContext } from "react";
+import React, { createContext, useReducer } from "react";
+import { INITIAL_STORE_STATE, storeReducer } from "../reducers/storeReducer";
 
 // expose our global state stored in context
 export const StoreContext = createContext({});
