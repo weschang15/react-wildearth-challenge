@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Cart from "./components/Cart";
 import Product from "./components/Product";
 import Products from "./components/Products";
 import { useDispatch } from "./hooks/useDispatch";
@@ -53,6 +54,9 @@ function App() {
         </Route>
         <Route path="/products/:handle" exact>
           <Product />
+        </Route>
+        <Route path="/cart" exact>
+          <Cart />
         </Route>
       </Switch>
     </BrowserRouter>
