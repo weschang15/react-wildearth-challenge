@@ -23,15 +23,22 @@ function Products({ products }) {
                 "0 4px 14px rgb(128 128 128 / 8%), 0 3px 6px rgb(128 128 128 / 6%)",
             }}
           >
-            <h2>
-              <Link
-                to={{
-                  pathname: `/products/${product.handle}`,
-                }}
-              >
-                {product.title}
-              </Link>
-            </h2>
+            <Link
+              className="block"
+              to={{
+                pathname: `/products/${product.handle}`,
+              }}
+            >
+              {product.images && product.images.length && (
+                <figure>
+                  <img
+                    src={product.images[0].src}
+                    alt={product.images[0].altText}
+                  />
+                </figure>
+              )}
+              <h2>{product.title}</h2>
+            </Link>
           </article>
         ))}
       </div>

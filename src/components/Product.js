@@ -82,63 +82,79 @@ function Product() {
     <Layout>
       <PageHeader pageTitle="Product page" />
       <section className="mt-5">
-        <h2 className="text-lg leading-6 font-medium text-gray-900">{title}</h2>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">{description}</p>
-        <form
-          method="POST"
-          onSubmit={handleAddToCart}
-          className="max-w-md w-full mt-5"
-        >
-          {variantsToDisplay.map((variant) => {
-            return (
-              <div key={variant.id} className="flex items-center mt-3">
+        <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          {product.images && product.images.length && (
+            <figure>
+              <img
+                src={product.images[0].src}
+                alt={product.images[0].altText}
+              />
+            </figure>
+          )}
+          <div>
+            <h2 className="text-lg leading-6 font-medium text-gray-900">
+              {title}
+            </h2>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              {description}
+            </p>
+            <form
+              method="POST"
+              onSubmit={handleAddToCart}
+              className="max-w-md w-full mt-5"
+            >
+              {variantsToDisplay.map((variant) => {
+                return (
+                  <div key={variant.id} className="flex items-center mt-3">
+                    <label
+                      htmlFor={`variant-${variant.id}`}
+                      className="mr-5 block text-sm font-medium text-gray-700"
+                    >
+                      <span className="text-gray-700 uppercase text-lg mt-3">
+                        {formatCurrency(variant.priceV2)}
+                      </span>{" "}
+                      {variant.title}
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                      id={`variant-${variant.id}`}
+                      type="radio"
+                      name="variant"
+                      value={variant.id}
+                      onChange={handleFieldChange}
+                      checked={fields.variant === variant.id}
+                    />
+                  </div>
+                );
+              })}
+              <div className="flex items-center mt-3 mb-3">
                 <label
-                  htmlFor={`variant-${variant.id}`}
+                  htmlFor={`item-${id}`}
                   className="mr-5 block text-sm font-medium text-gray-700"
                 >
-                  <span className="text-gray-700 uppercase text-lg mt-3">
-                    {formatCurrency(variant.priceV2)}
-                  </span>{" "}
-                  {variant.title}
+                  Quantity
                 </label>
                 <input
-                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                  id={`variant-${variant.id}`}
-                  type="radio"
-                  name="variant"
-                  value={variant.id}
+                  id={`item-${id}`}
+                  type="number"
+                  min="0"
+                  max="5"
+                  name="quantity"
+                  value={fields.quantity}
+                  step="1"
                   onChange={handleFieldChange}
-                  checked={fields.variant === variant.id}
                 />
               </div>
-            );
-          })}
-          <div className="flex items-center mt-3 mb-3">
-            <label
-              htmlFor={`item-${id}`}
-              className="mr-5 block text-sm font-medium text-gray-700"
-            >
-              Quantity
-            </label>
-            <input
-              id={`item-${id}`}
-              type="number"
-              min="0"
-              max="5"
-              name="quantity"
-              value={fields.quantity}
-              step="1"
-              onChange={handleFieldChange}
-            />
+              <button
+                type="submit"
+                disabled={isAdding}
+                className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+              >
+                Add to cart
+              </button>
+            </form>
           </div>
-          <button
-            type="submit"
-            disabled={isAdding}
-            className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
-          >
-            Add to cart
-          </button>
-        </form>
+        </div>
       </section>
     </Layout>
   );
