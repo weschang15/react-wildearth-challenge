@@ -29,13 +29,15 @@ function Products({ products }) {
                 pathname: `/products/${product.handle}`,
               }}
             >
-              {product.images && product.images.length && (
+              {product.images && product.images.length ? (
                 <figure>
                   <img
                     src={product.images[0].src}
                     alt={product.images[0].altText}
                   />
                 </figure>
+              ) : (
+                ""
               )}
               <h2>{product.title}</h2>
             </Link>
